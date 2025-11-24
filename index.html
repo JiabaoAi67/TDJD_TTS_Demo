@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TDJD-TTS: Trans-Dimensional Jump-Diffusion TTS</title>
+
+  
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">TDJD-TTS: Trans-Dimensional Jump-Diffusion TTS</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Jiabao Ai<sup>1</sup>,</span>
+            <span class="author-block">Minghui Zhao<sup>1</sup>,</span>
+            <span class="author-block">Anton Ragni<sup>1</sup></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>The University of Sheffield</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div class="columns is-vcentered">
+        <div class="column is-6 has-text-centered">
+          <video id="teaser" autoplay muted loop playsinline style="width:100%;height:auto;">
+            <source src="./static/videos/teaser.mp4" type="video/mp4">
+          </video>
+          <!-- 可选标签 -->
+          <p class="is-size-6 mt-2">UDD</p>
+        </div>
+        <div class="column is-6 has-text-centered">
+          <video id="teaser-jump" autoplay muted loop playsinline style="width:100%;height:auto;">
+            <source src="./static/videos/teaser_jump.mp4" type="video/mp4">
+          </video>
+          <!-- 可选标签 -->
+          <p class="is-size-6 mt-2">TDD</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Diffusion-based text-to-speech (TTS) models typically treat the modeling of temporal structure and spectral content as decoupled tasks. Prior systems, such as Grad-TTS, first commit to a rigid, one-shot duration regression that fixes the temporal structure before any diffusion-based refinement. However, regression objectives are ill-suited for capturing the multimodal nature of temporal structure (i.e., diverse rhythmic possibilities). 
+          </p>
+          <p>
+            Moreover, this irreversible two-stage design ignores the need to iteratively refine the temporal structure, forcing the diffusion model to condition on a suboptimal, static prior.
+          </p>
+          <p>
+            To address this, we adapt the Trans-Dimensional Jump Diffusion (TDJD) framework to couple the evolution of temporal structure and spectral content within a unified iterative refinement scheme. Furthermore, we introduce a novel Upsample-Diffuse-Downsample (UDD) strategy to mitigate the instability inherent in naive trans-dimensional diffusion. By allowing the diffusion process to operate on a fixed-dimension "blueprint" space while delegating length growth to the lower-dimensional space.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    
+  </div>
+</section>
+
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Progressive Refinement of Mel-Spectrograms</h2>
+        <div class="content has-text-justified">
+          <p>
+            Our model progressively refines the mel-spectrogram. Below are
+            samples of the mel-spectrogram and the corresponding vocoded audio at different
+            iterations of the diffusion process.
+          </p>
+          <table style="margin-left:auto;margin-right:auto;" align="center">
+            <tbody>
+              <tr>
+                <td style="text-align:left; color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;"><b>Decoder state</b></td>
+                <td style="text-align:center; color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;" align="center"><b>Mel-spectrogram sample</b></td>
+                <td style="text-align:center; color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;" align="center"><b>Vocoded audio</b></td>
+              </tr>
+
+              <tr>
+                <td style="color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;">
+                  After 0 iterations
+                </td>
+                <td align="center">
+                  <img src="./static/images/0.png" width="400px" alt="mel 0">
+                </td>
+                <td align="center">
+                  <audio controls preload="none" style="width:100%;">
+                    <source src="./static/speech/0.wav" type="audio/wav">
+                  </audio>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;">
+                  After 10 iterations
+                </td>
+                <td align="center">
+                  <img src="./static/images/1.png" width="400px" alt="mel 1">
+                </td>
+                <td align="center">
+                  <audio controls preload="none" style="width:100%;">
+                    <source src="./static/speech/1.wav" type="audio/wav">
+                  </audio>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;">
+                  After 20 iterations
+                </td>
+                <td align="center">
+                  <img src="./static/images/2.png" width="400px" alt="mel 2">
+                </td>
+                <td align="center">
+                  <audio controls preload="none" style="width:100%;">
+                    <source src="./static/speech/2.wav" type="audio/wav">
+                  </audio>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;">
+                  After 30 iterations
+                </td>
+                <td align="center">
+                  <img src="./static/images/3.png" width="400px" alt="mel 3">
+                </td>
+                <td align="center">
+                  <audio controls preload="none" style="width:100%;">
+                    <source src="./static/speech/3.wav" type="audio/wav">
+                  </audio>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;">
+                  After 40 iterations
+                </td>
+                <td align="center">
+                  <img src="./static/images/4.png" width="400px" alt="mel 4">
+                </td>
+                <td align="center">
+                  <audio controls preload="none" style="width:100%;">
+                    <source src="./static/speech/4.wav" type="audio/wav">
+                  </audio>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;">
+                  After 50 iterations
+                </td>
+                <td align="center">
+                  <img src="./static/images/5.png" width="400px" alt="mel 5">
+                </td>
+                <td align="center">
+                  <audio controls preload="none" style="width:100%;">
+                    <source src="./static/speech/5.wav" type="audio/wav">
+                  </audio>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- ==== /Six-row section ==== -->
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+<br>
+
+
+
+
+</body>
+</html>
