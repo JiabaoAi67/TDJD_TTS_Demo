@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
-  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+        content="Audio demo for Beyond Two-stage Diffusion TTS: Joint Structure and Content Refinement via Jump Diffusion. Accepted to INTERSPEECH 2026.">
+  <meta name="keywords" content="Text-to-speech, jump diffusion, diffusion models, flow matching, TDJD-TTS, UDD, INTERSPEECH 2026">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TDJD-TTS: Trans-Dimensional Jump-Diffusion TTS</title>
+  <link rel="canonical" href="https://jiabaoai67.github.io/TDJD_TTS_Demo/">
+  <title>Beyond Two-stage Diffusion TTS: Joint Structure and Content Refinement via Jump Diffusion</title>
 
   
 
@@ -20,7 +21,6 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -40,7 +40,7 @@
   </div>
   <div class="navbar-menu">
     <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="">
+      <a class="navbar-item" href="https://jiabaoai67.github.io/" aria-label="Jiabao Ai homepage">
       <span class="icon">
           <i class="fas fa-home"></i>
       </span>
@@ -58,7 +58,9 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">TDJD-TTS: Trans-Dimensional Jump-Diffusion TTS</h1>
+          <h1 class="title is-2 publication-title">Beyond Two-stage Diffusion TTS: Joint Structure and Content Refinement via Jump Diffusion</h1>
+          <p class="subtitle is-5">TDJD-TTS · Jump Diffusion for Text-to-Speech</p>
+          <p class="is-size-5 mb-4">INTERSPEECH 2026 · Accepted</p>
           <div class="is-size-5 publication-authors">
             <span class="author-block">Jiabao Ai<sup>1</sup>,</span>
             <span class="author-block">Minghui Zhao<sup>1</sup>,</span>
@@ -73,7 +75,7 @@
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href=""
+                <a href="https://arxiv.org/pdf/2603.14032"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -82,7 +84,7 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href=""
+                <a href="https://arxiv.org/abs/2603.14032"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -92,33 +94,16 @@
               </span>
               <!-- Video Link. -->
               <span class="link-block">
-                <a href=""
+                <a href="#videos"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
-                      <i class="fab fa-youtube"></i>
+                      <i class="fas fa-film"></i>
                   </span>
                   <span>Video</span>
                 </a>
               </span>
-              <!-- Code Link. -->
-              <span class="link-block">
-                <a href=""
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
-                  </a>
-              </span>
-              <!-- Dataset Link. -->
-              <span class="link-block">
-                <a href=""
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="far fa-images"></i>
-                  </span>
-                  <span>Data</span>
-                  </a>
+              <!-- Code is not publicly released; no separate data release has been verified.
+                   Add resource buttons only when public destinations are available. -->
             </div>
 
           </div>
@@ -128,7 +113,7 @@
   </div>
 </section>
 
-<section class="hero teaser">
+<section class="hero teaser" id="videos">
   <div class="container is-max-desktop">
     <div class="hero-body">
       <div class="columns is-vcentered">
@@ -154,7 +139,7 @@
 
 
 
-<section class="section">
+<section class="section" style="padding-top: 1.5rem;">
   <div class="container is-max-desktop">
     <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
@@ -162,13 +147,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Diffusion-based text-to-speech (TTS) models typically treat the modeling of temporal structure and spectral content as decoupled tasks. Prior systems, such as Grad-TTS, first commit to a rigid, one-shot duration regression that fixes the temporal structure before any diffusion-based refinement. However, regression objectives are ill-suited for capturing the multimodal nature of temporal structure (i.e., diverse rhythmic possibilities). 
-          </p>
-          <p>
-            Moreover, this irreversible two-stage design ignores the need to iteratively refine the temporal structure, forcing the diffusion model to condition on a suboptimal, static prior.
-          </p>
-          <p>
-            To address this, we adapt the Trans-Dimensional Jump Diffusion (TDJD) framework to couple the evolution of temporal structure and spectral content within a unified iterative refinement scheme. Furthermore, we introduce a novel Upsample-Diffuse-Downsample (UDD) strategy to mitigate the instability inherent in naive trans-dimensional diffusion. By allowing the diffusion process to operate on a fixed-dimension "blueprint" space while delegating length growth to the lower-dimensional space.
+            Diffusion and flow matching TTS faces a tension between discrete temporal structure and continuous spectral modeling. Two-stage models first determine durations then diffuse on fixed alignments, often collapsing to mean prosody and applying uniform stretching when adapting speaking rate. Single-stage attention-based models avoid explicit durations but suffer alignment instability. We propose a jump-diffusion framework where discrete jumps model temporal structure and continuous diffusion refines spectral content within one probabilistic process. On LJSpeech, our method achieves 3.37% WER vs. 4.38% for Grad-TTS with better UTMOSv2. In out-of-distribution slow speech, our model autonomously inserts natural pauses rather than stretching uniformly, improving intelligibility over two-stage baselines.
           </p>
         </div>
       </div>
@@ -183,105 +162,110 @@
 
 
 
-<section class="section">
+<section class="section" style="padding-top: 1rem;">
   <div class="container is-max-desktop">
-    <div class="columns is-centered">
+    <div class="columns is-centered has-text-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Progressive Refinement of Mel-Spectrograms</h2>
+        <h2 class="title is-3">Model Overview</h2>
+        <figure>
+          <img src="./static/images/method.png" alt="Method" style="width:70%; max-width:630px;">
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 1rem;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Noisy and incomplete &rarr; Clean and complete</h2>
         <div class="content has-text-justified">
           <p>
-            Our model progressively refines the mel-spectrogram. Below are
-            samples of the mel-spectrogram and the corresponding vocoded audio at different
-            iterations of the diffusion process.
+            Our model progressively refines the mel-spectrogram and jumps to target length. Below are samples of the mel-spectrogram and the corresponding vocoded audio at different iterations of the diffusion process.
           </p>
           <table style="margin-left:auto;margin-right:auto;" align="center">
             <tbody>
               <tr>
-                <td style="text-align:left; color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;"><b>Decoder state</b></td>
+                <td style="text-align:center; color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;"><b>Decoder state</b></td>
                 <td style="text-align:center; color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;" align="center"><b>Mel-spectrogram sample</b></td>
                 <td style="text-align:center; color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;" align="center"><b>Vocoded audio</b></td>
               </tr>
 
               <tr>
-                <td style="color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;">
-                  After 0 iterations
+                <td style="color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif; vertical-align:middle; text-align:center;">
+                  <i>t</i> = 0.998
                 </td>
-                <td align="center">
+                <td style="text-align:center; vertical-align:middle;">
                   <img src="./static/images/0.png" width="400px" alt="mel 0">
                 </td>
-                <td align="center">
-                  <audio controls preload="none" style="width:100%;">
-                    <source src="./static/speech/0.wav" type="audio/wav">
+                <td align="center" style="vertical-align:middle;">
+                  <audio controls preload="none" style="width:150px;"><source src="./static/speech/0.wav" type="audio/wav">
                   </audio>
                 </td>
               </tr>
 
               <tr>
-                <td style="color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;">
-                  After 10 iterations
+                <td style="color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif; vertical-align:middle; text-align:center;">
+                  <i>t</i> = 0.797
                 </td>
-                <td align="center">
+                <td style="text-align:center; vertical-align:middle;">
                   <img src="./static/images/1.png" width="400px" alt="mel 1">
                 </td>
-                <td align="center">
-                  <audio controls preload="none" style="width:100%;">
-                    <source src="./static/speech/1.wav" type="audio/wav">
+                <td align="center" style="vertical-align:middle;">
+                  <audio controls preload="none" style="width:150px;"><source src="./static/speech/1.wav" type="audio/wav">
                   </audio>
                 </td>
               </tr>
 
               <tr>
-                <td style="color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;">
-                  After 20 iterations
+                <td style="color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif; vertical-align:middle; text-align:center;">
+                  <i>t</i> = 0.579
                 </td>
-                <td align="center">
+                <td style="text-align:center; vertical-align:middle;">
                   <img src="./static/images/2.png" width="400px" alt="mel 2">
                 </td>
-                <td align="center">
-                  <audio controls preload="none" style="width:100%;">
-                    <source src="./static/speech/2.wav" type="audio/wav">
+                <td align="center" style="vertical-align:middle;">
+                  <audio controls preload="none" style="width:150px;"><source src="./static/speech/2.wav" type="audio/wav">
                   </audio>
                 </td>
               </tr>
 
               <tr>
-                <td style="color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;">
-                  After 30 iterations
+                <td style="color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif; vertical-align:middle; text-align:center;">
+                  <i>t</i> = 0.397
                 </td>
-                <td align="center">
+                <td style="text-align:center; vertical-align:middle;">
                   <img src="./static/images/3.png" width="400px" alt="mel 3">
                 </td>
-                <td align="center">
-                  <audio controls preload="none" style="width:100%;">
-                    <source src="./static/speech/3.wav" type="audio/wav">
+                <td align="center" style="vertical-align:middle;">
+                  <audio controls preload="none" style="width:150px;"><source src="./static/speech/3.wav" type="audio/wav">
                   </audio>
                 </td>
               </tr>
 
               <tr>
-                <td style="color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;">
-                  After 40 iterations
+                <td style="color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif; vertical-align:middle; text-align:center;">
+                  <i>t</i> = 0.198
                 </td>
-                <td align="center">
+                <td style="text-align:center; vertical-align:middle;">
                   <img src="./static/images/4.png" width="400px" alt="mel 4">
                 </td>
-                <td align="center">
-                  <audio controls preload="none" style="width:100%;">
-                    <source src="./static/speech/4.wav" type="audio/wav">
+                <td align="center" style="vertical-align:middle;">
+                  <audio controls preload="none" style="width:150px;"><source src="./static/speech/4.wav" type="audio/wav">
                   </audio>
                 </td>
               </tr>
 
               <tr>
-                <td style="color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;">
-                  After 50 iterations
+                <td style="color:rgb(22,22,97); font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif; vertical-align:middle; text-align:center;">
+                  <i>t</i> = 0.000
                 </td>
-                <td align="center">
+                <td style="text-align:center; vertical-align:middle;">
                   <img src="./static/images/5.png" width="400px" alt="mel 5">
                 </td>
-                <td align="center">
-                  <audio controls preload="none" style="width:100%;">
-                    <source src="./static/speech/5.wav" type="audio/wav">
+                <td align="center" style="vertical-align:middle;">
+                  <audio controls preload="none" style="width:150px;"><source src="./static/speech/5.wav" type="audio/wav">
                   </audio>
                 </td>
               </tr>
@@ -296,7 +280,125 @@
   </div>
 <br>
 
+<section class="section" style="padding-top: 1rem;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Speech Samples</h2>
+        <div class="content">
+          <table style="width:100%; border-collapse:collapse;">
+            <thead>
+              <tr>
+                <th style="text-align:center; color:rgb(22,22,97); font-family:'Trebuchet MS',Arial,sans-serif; padding:8px; border-bottom:2px solid #ddd; width:22%;">Text</th>
+                <th style="text-align:center; color:rgb(22,22,97); font-family:'Trebuchet MS',Arial,sans-serif; padding:8px; border-bottom:2px solid #ddd;">GT</th>
+                <th style="text-align:center; color:rgb(22,22,97); font-family:'Trebuchet MS',Arial,sans-serif; padding:8px; border-bottom:2px solid #ddd;">Grad-TTS</th>
+                <th style="text-align:center; color:rgb(22,22,97); font-family:'Trebuchet MS',Arial,sans-serif; padding:8px; border-bottom:2px solid #ddd;">OneShot (Ours)</th>
+                <th style="text-align:center; color:rgb(22,22,97); font-family:'Trebuchet MS',Arial,sans-serif; padding:8px; border-bottom:2px solid #ddd;">TDD</th>
+                <th style="text-align:center; color:rgb(22,22,97); font-family:'Trebuchet MS',Arial,sans-serif; padding:8px; border-bottom:2px solid #ddd;">UDD (Ours)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding:8px; vertical-align:middle; font-size:0.85em; border-bottom:1px solid #eee;">together with a great increase in the payrolls there has come a substantial rise in the total of industrial profits</td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0002/idx0002_GT.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0002/idx0002_Grad-TTS.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0002/idx0002_OneShot.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0002/idx0002_TDDArg-Raw.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0002/idx0002_UDDArg-Raw.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td style="padding:8px; vertical-align:middle; font-size:0.85em; border-bottom:1px solid #eee;">and recognized as one of the frequenters of the bogus lawstationers His arrest led to that of others</td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0014/idx0014_GT.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0014/idx0014_Grad-TTS.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0014/idx0014_OneShot.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0014/idx0014_TDDArg-Raw.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0014/idx0014_UDDArg-Raw.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td style="padding:8px; vertical-align:middle; font-size:0.85em; border-bottom:1px solid #eee;">All the committee could do in this respect was to throw the responsibility on others</td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0025/idx0025_GT.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0025/idx0025_Grad-TTS.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0025/idx0025_OneShot.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0025/idx0025_TDDArg-Raw.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0025/idx0025_UDDArg-Raw.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td style="padding:8px; vertical-align:middle; font-size:0.85em; border-bottom:1px solid #eee;">who came from his room ready dressed a suspicious circumstance as he was always late in the morning</td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0029/idx0029_GT.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0029/idx0029_Grad-TTS.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0029/idx0029_OneShot.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0029/idx0029_TDDArg-Raw.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0029/idx0029_UDDArg-Raw.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td style="padding:8px; vertical-align:middle; font-size:0.85em; border-bottom:1px solid #eee;">yet he could not overcome the strange fascination it had for him and remained by the side of the corpse till the stretcher came</td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0062/idx0062_GT.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0062/idx0062_Grad-TTS.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0062/idx0062_OneShot.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0062/idx0062_TDDArg-Raw.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0062/idx0062_UDDArg-Raw.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td style="padding:8px; vertical-align:middle; font-size:0.85em; border-bottom:1px solid #eee;">The inadequacy of the jail was noticed and reported upon again and again by the grand juries of the city of London</td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0068/idx0068_GT.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0068/idx0068_Grad-TTS.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0068/idx0068_OneShot.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0068/idx0068_TDDArg-Raw.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0068/idx0068_UDDArg-Raw.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td style="padding:8px; vertical-align:middle; font-size:0.85em; border-bottom:1px solid #eee;">is closely reproduced in the lifehistory of existing deer Or in other words</td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0072/idx0072_GT.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0072/idx0072_Grad-TTS.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0072/idx0072_OneShot.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0072/idx0072_TDDArg-Raw.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0072/idx0072_UDDArg-Raw.wav" type="audio/wav"></audio></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section class="section" style="padding-top: 1rem;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Slow Speech (0.75x): Uniform Stretching vs Adaptive Pause</h2>
+        <div class="content">
+          <table style="width:100%; border-collapse:collapse;">
+            <thead>
+              <tr>
+                <th style="text-align:center; color:rgb(22,22,97); font-family:'Trebuchet MS',Arial,sans-serif; padding:8px; border-bottom:2px solid #ddd;">Grad-TTS</th>
+                <th style="text-align:center; color:rgb(22,22,97); font-family:'Trebuchet MS',Arial,sans-serif; padding:8px; border-bottom:2px solid #ddd;">UDD (Ours)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0008_slow/idx0008_Grad-TTS.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0008_slow/idx0008_UDDArg-Raw.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0015_slow/idx0015_Grad-TTS.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0015_slow/idx0015_UDDArg-Raw.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0034_slow/idx0034_Grad-TTS.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0034_slow/idx0034_UDDArg-Raw.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0050_slow/idx0050_Grad-TTS.wav" type="audio/wav"></audio></td>
+                <td style="padding:8px; vertical-align:middle; text-align:center; border-bottom:1px solid #eee;"><audio controls preload="none" style="width:150px;"><source src="./static/speech/utt_0050_slow/idx0050_UDDArg-Raw.wav" type="audio/wav"></audio></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 </body>
