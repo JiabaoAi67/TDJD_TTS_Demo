@@ -81,16 +81,30 @@
     <div class="hero-body">
       <div class="columns is-vcentered">
         <div class="column is-6 has-text-centered">
-          <video id="teaser" autoplay muted loop playsinline style="width:100%;height:auto;">
-            <source src="./static/videos/teaser.mp4" type="video/mp4">
-          </video>
+          <div class="teaser-player" aria-busy="true">
+            <video id="teaser" autoplay muted loop playsinline preload="auto" width="1200" height="300" style="width:100%;height:auto;" aria-label="UDD animation">
+              <source src="./static/videos/teaser.mp4" type="video/mp4">
+            </video>
+            <div class="teaser-loading">
+              <span class="teaser-loading-text" role="status">Loading animation…</span>
+              <progress class="teaser-loading-progress" max="100" aria-label="UDD animation buffered"></progress>
+              <button class="teaser-loading-action" type="button" hidden>Retry</button>
+            </div>
+          </div>
           <!-- 可选标签 -->
           <p class="is-size-6 mt-2">UDD</p>
         </div>
         <div class="column is-6 has-text-centered">
-          <video id="teaser-jump" autoplay muted loop playsinline style="width:100%;height:auto;">
-            <source src="./static/videos/teaser_jump.mp4" type="video/mp4">
-          </video>
+          <div class="teaser-player" aria-busy="true">
+            <video id="teaser-jump" autoplay muted loop playsinline preload="auto" width="1200" height="300" style="width:100%;height:auto;" aria-label="TDD animation">
+              <source src="./static/videos/teaser_jump.mp4" type="video/mp4">
+            </video>
+            <div class="teaser-loading">
+              <span class="teaser-loading-text" role="status">Loading animation…</span>
+              <progress class="teaser-loading-progress" max="100" aria-label="TDD animation buffered"></progress>
+              <button class="teaser-loading-action" type="button" hidden>Retry</button>
+            </div>
+          </div>
           <!-- 可选标签 -->
           <p class="is-size-6 mt-2">TDD</p>
         </div>
